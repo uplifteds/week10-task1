@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <property name = "connection.driver_class">org.postgresql.Driver</property>
+        <property name = "connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name = "connection.username">javauser</property>
+        <property name = "connection.password">notencrypted</property>
+        <property name = "dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name = "hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+
+        <mapping resource = "org/uplifteds/entity/Event.hbm.xml"/>
+        <mapping resource = "org/uplifteds/entity/User.hbm.xml"/>
+        <mapping resource = "org/uplifteds/entity/Ticket.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

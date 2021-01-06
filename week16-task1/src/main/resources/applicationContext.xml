@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:property-placeholder location="classpath:application.properties" />
+
+	<bean id="dateFormater" class="java.text.SimpleDateFormat">
+		<constructor-arg value="dd-MM-yyyy" />
+	</bean>
+
+<!-- extra mile: Use "p" namespace to define properties-->
+	<bean id="event" class="org.uplifteds.entity.Event"
+		p:id="1"
+		p:eventName="${event.name}"
+		p:place="${event.place}"
+		p:capacity="${event.capacity}"
+		p:date="${event.date}"
+		p:create_date="${event.create_date}"
+		p:update_date="${event.update_date}"
+		p:ticketPrice ="${event.ticketprice}"
+	/>
+
+	<!--5. Services beans should be injected into facade using constructor-based injections. (1 point)-->
+    <bean id="eventService" class="org.uplifteds.service.EventService">
+		<constructor-arg ref="event" />
+	</bean>
+
+	<bean id="user" class="org.uplifteds.entity.User"
+		  p:id="1"
+		  p:username="${user.username}"
+		  p:first_name="${user.first_name}"
+		  p:last_name="${user.last_name}"
+		  p:age="${user.age}"
+		  p:email="${user.email}"
+		  p:create_date="${user.create_date}"
+		  p:update_date="${user.update_date}"
+	/>
+
+	<bean id="userService" class="org.uplifteds.service.UserService">
+		<constructor-arg ref="user" />
+	</bean>
+
+	<bean id="ticketService" class="org.uplifteds.service.TicketService">
+		<constructor-arg ref="eventService" />
+	</bean>
+
+</beans>
+
+
+
+
+

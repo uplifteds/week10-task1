@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name = "org.uplifteds.entity.User" table = "users">
+        <id name = "id" column = "id" />
+        <property name = "username" column = "username" />
+        <property name = "first_name" column = "first_name" />
+        <property name = "last_name" column = "last_name" />
+        <property name = "age" column = "age" />
+        <property name = "email" column = "email" />
+        <property name = "create_date" column = "create_date" />
+        <property name = "update_date" column = "update_date" />
+
+    </class>
+</hibernate-mapping>

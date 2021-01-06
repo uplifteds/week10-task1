@@ -1,0 +1,32 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name = "org.uplifteds.entity.Ticket" batch-size="25" table = "tickets">
+        <id name = "id" column = "id" />
+        <property name = "place" column = "place" />
+        <property name = "create_date" column = "create_date" />
+        <property name = "price" column = "price" />
+        <property name = "cinema_phone" column = "cinema_phone" />
+        <property name = "cinema_facility" column = "cinema_facility" />
+
+        <property name = "category" column = "category" />
+        <property name = "cinema_name" column = "cinema_name" />
+        <property name = "cinema_address" column = "cinema_address" />
+        <property name = "purchase_date" column = "purchase_date" />
+        <property name = "update_date" column = "update_date" />
+
+        <many-to-one name="event"
+                     column="eventid"
+                     class="org.uplifteds.entity.Event"
+                     fetch="join"
+                     cascade="save-update" />
+
+        <many-to-one name="user"
+                     column="userid"
+                     class="org.uplifteds.entity.User"
+                     fetch="join"
+                     cascade="save-update" />
+    </class>
+</hibernate-mapping>

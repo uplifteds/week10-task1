@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name = "org.uplifteds.entity.Event" table = "events">
+        <id name = "id"  column = "id" />
+        <property name = "eventName" column = "eventname" />
+        <property name = "place" column = "place" />
+        <property name = "capacity" column = "capacity" />
+        <property name = "date" column = "date" />
+        <property name = "create_date" column = "create_date" />
+        <property name = "update_date" column = "update_date" />
+        <property name = "ticketPrice" column = "ticketprice" />
+    </class>
+</hibernate-mapping>

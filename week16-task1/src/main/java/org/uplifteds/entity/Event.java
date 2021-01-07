@@ -1,8 +1,6 @@
 package org.uplifteds.entity;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.List;
+import javax.persistence.Id;
 
 public class Event {
     @Id

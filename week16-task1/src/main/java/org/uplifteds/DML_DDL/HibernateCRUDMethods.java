@@ -13,9 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CRUDMethods {
-
-
+public class HibernateCRUDMethods {
     public static void doDeleteValuesInAllTables(Session session){
         List<String> l = new ArrayList<>();
         String userclass = User.class.getSimpleName();

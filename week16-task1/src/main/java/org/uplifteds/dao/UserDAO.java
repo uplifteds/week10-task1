@@ -1,14 +1,9 @@
 package org.uplifteds.dao;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.uplifteds.DML_DDL.CRUDMethods;
-import org.uplifteds.entity.Event;
 import org.uplifteds.entity.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
 
 public class UserDAO implements DAO{

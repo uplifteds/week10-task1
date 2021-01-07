@@ -1,15 +1,10 @@
 package org.uplifteds.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
-import org.uplifteds.DML_DDL.CRUDMethods;
-import org.uplifteds.entity.Event;
+import org.uplifteds.DML_DDL.HibernateCRUDMethods;
 import org.uplifteds.entity.Ticket;
 
 import javax.persistence.EntityManager;
@@ -47,7 +42,7 @@ public class TicketDAO implements DAO{
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
 
-            CRUDMethods.doUpdateJoinColumnInTicketTable(em, cb, col);
+            HibernateCRUDMethods.doUpdateJoinColumnInTicketTable(em, cb, col);
 
             em.getTransaction().commit();
         }

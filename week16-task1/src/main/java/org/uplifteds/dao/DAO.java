@@ -3,7 +3,7 @@ package org.uplifteds.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uplifteds.AdvancedDBBookingTicketLauncher;
-import org.uplifteds.DML_DDL.CRUDMethods;
+import org.uplifteds.DML_DDL.HibernateCRUDMethods;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public interface DAO<Entity> {
     default void cleanAllTables(){
         try (final Session session = factory.openSession()){
             session.beginTransaction();
-            CRUDMethods.doDeleteValuesInAllTables(session);
+            HibernateCRUDMethods.doDeleteValuesInAllTables(session);
             session.getTransaction().commit();
         }
     }

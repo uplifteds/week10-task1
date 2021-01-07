@@ -60,7 +60,7 @@ public class DAODBOperator {
 
       for (int i = firstId; i <= listOfTickets.size(); i++){
         final Ticket iterTicket = ticketDAO.read(i);
-        System.out.println("Created : " + iterTicket);
+//        System.out.println("Created : " + iterTicket);
         System.out.println();
       }
 

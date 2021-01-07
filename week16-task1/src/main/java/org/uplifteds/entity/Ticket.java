@@ -1,15 +1,11 @@
 package org.uplifteds.entity;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Table(name = "tickets")
-@XmlRootElement(name="Ticket")
 public class Ticket {
     private int id;
     private String place;

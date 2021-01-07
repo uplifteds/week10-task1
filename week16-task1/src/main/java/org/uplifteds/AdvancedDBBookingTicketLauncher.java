@@ -1,11 +1,10 @@
 package org.uplifteds;
 
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.uplifteds.DML_DDL.NativeCRUDMethods;
+import org.uplifteds.DML_DDL.JDBCCRUDMethods;
 import org.uplifteds.dao.DAO;
 import org.uplifteds.dao.EventDAO;
 import org.uplifteds.daooperations.DAODBOperator;
@@ -16,7 +15,6 @@ import org.uplifteds.service.UserService;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +22,13 @@ import java.util.Properties;
 
 public class AdvancedDBBookingTicketLauncher {
 
-  public static ApplicationContext context = new FileSystemXmlApplicationContext("src/main/resources/applicationContext.xml");
+  public static ApplicationContext context =
+          new FileSystemXmlApplicationContext("src/main/resources/applicationContext.xml");
   public static SessionFactory sessionFactoryGlobal;
 
   public static List<String> listOfTables = new ArrayList<>();
 
-  public static void main(String[] args) throws IOException, SQLException, ParseException {
+  public static void main(String[] args) throws IOException, SQLException {
   //What kind of index PostgreSQL creates when we use default CREATE INDEX command?
     //answer: btree
 
@@ -74,11 +73,25 @@ public class AdvancedDBBookingTicketLauncher {
         //1.As a data analyst, I want to be able to get the next aggregated information:
         // month, category, age, tickets count
 
-        NativeCRUDMethods.createMVUsersJoinTickets(stmt, monthValue, materializedViewName);
-        NativeCRUDMethods.readFromMVUsersJoinTickets(stmt, monthValue, materializedViewName);
+        JDBCCRUDMethods.createMVUsersJoinTickets(stmt, monthValue, materializedViewName);
+        JDBCCRUDMethods.readFromMVUsersTableJoinTickets(stmt, monthValue, materializedViewName);
+
+        //Percentage of each category across all tickets
+        calcTicketPercentOfEachCategory(stmt, materializedViewName);
+
+        //Average days difference between ticket purchase date end event date
+        String materializedViewName2 = "mv_events_tickets";
+        JDBCCRUDMethods.createMVEventsJoinTickets(stmt, materializedViewName2);
+        JDBCCRUDMethods.calcAvgDayDiffTicketPurchaseDateAndEventDate(stmt,materializedViewName2);
 
       }
     }
+  }
+
+  private static void calcTicketPercentOfEachCategory(Statement stmt, String materializedViewName) throws SQLException {
+    JDBCCRUDMethods.calcPercentOfTicketPerCategory(stmt, TicketService.categoryList.get(0), materializedViewName);
+    JDBCCRUDMethods.calcPercentOfTicketPerCategory(stmt, TicketService.categoryList.get(1), materializedViewName);
+    JDBCCRUDMethods.calcPercentOfTicketPerCategory(stmt, TicketService.categoryList.get(2), materializedViewName);
   }
 
   private static int getMonthValueFromTicketPurchaseDate() {

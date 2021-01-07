@@ -15,6 +15,7 @@ public class TicketService implements BookingFacade {
     public static int totalTickets;
 
     public static List<Ticket> listOfTickets = new ArrayList<>();
+    public static List<String> categoryList = new ArrayList<>();
 
     public static String place;
     public static String create_date;
@@ -39,7 +40,7 @@ public class TicketService implements BookingFacade {
 
         List<String> cinemaFacilityDedupList = getDedupCinemaFacilityList();
 
-        List<String> categoryList = new ArrayList<>();
+
         categoryList.add("ULTRA");
         categoryList.add("PREMIUM");
         categoryList.add("STANDARD");
@@ -50,7 +51,7 @@ public class TicketService implements BookingFacade {
                 String place = generateSeatName(seatOffset, i, j);
 
                 //Please note that the purchase date field value cannot be less than event date field value
-                Timestamp purchase_date = addOneDayToCreateDay();
+                Timestamp purchase_date = addDaysToCreateDay();
 
                 String update_date = create_date;
 
@@ -70,12 +71,16 @@ public class TicketService implements BookingFacade {
         return listOfServiceOutput;
     }
 
-    private Timestamp addOneDayToCreateDay() {
-        int oneDay = 1;
+    private Timestamp addDaysToCreateDay() {
+        int numberOfDays = new Random()
+                .ints(1, 5)
+                .findFirst()
+                .getAsInt();
+
         Timestamp purchase_date = Timestamp.valueOf(create_date);
         Calendar cal = Calendar.getInstance();
         cal.setTime(purchase_date);
-        cal.add(Calendar.DAY_OF_WEEK, oneDay);
+        cal.add(Calendar.DAY_OF_WEEK, numberOfDays);
         purchase_date.setTime(cal.getTime().getTime());
         return purchase_date;
     }

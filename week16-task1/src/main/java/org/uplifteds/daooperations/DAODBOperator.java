@@ -64,15 +64,6 @@ public class DAODBOperator {
         System.out.println();
       }
 
-      int secondId = firstId++;
-
-      final Ticket readTicket2 = ticketDAO.read(secondId);
-      readTicket2.setPrice(9);
-      ticketDAO.update(readTicket2);
-
-      final Ticket updatedTicket2 = ticketDAO.read(secondId);
-      System.out.println("Updated : " + updatedTicket2);
-      System.out.println();
     }
 
     public static void findTicketByCriteria(SessionFactory factory, String category) {

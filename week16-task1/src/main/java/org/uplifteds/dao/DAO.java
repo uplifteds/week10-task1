@@ -15,7 +15,7 @@ public interface DAO<Entity> {
     //Design a new DML function, which is responsible for creation n of dummy records in all tables
     // from step 1, using the plpgsql language.
 
-    default void create(@NotNull final Object obj) throws IOException, SQLException {
+    default void create(@NotNull final Object obj) {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
             session.save(obj);

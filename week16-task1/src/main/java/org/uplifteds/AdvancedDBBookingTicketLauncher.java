@@ -49,6 +49,8 @@ public class AdvancedDBBookingTicketLauncher {
       //Table “tickets”: Find record by category in (…)
       DAODBOperator.findTicketByCriteria(factory, "ULTRA");
 
+      System.out.println("Ticket insertion time: " + DAODBOperator.diff);
+
       UserService userService = context.getBean("userService", UserService.class);
       userService.bookOrCancelTicket();
 

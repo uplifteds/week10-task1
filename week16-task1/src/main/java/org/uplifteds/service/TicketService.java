@@ -65,7 +65,7 @@ public class TicketService implements BookingFacade {
             }
         }
         //Using prepared function in step 3, populate tables with 100_000 tickets,
-        // measure population time and document it: 80 seconds
+        // measure population time and document it: 38 seconds
 
         System.out.println("Tickets are published: ");
         return listOfServiceOutput;

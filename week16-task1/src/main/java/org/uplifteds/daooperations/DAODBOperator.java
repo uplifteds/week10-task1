@@ -16,8 +16,9 @@ import java.util.List;
 public class DAODBOperator {
     public static int firstId = 1;
     static int firstListElement = 0;
+    public static long diff;
 
-    public static void doEventDAO(SessionFactory factory) throws IOException, SQLException {
+    public static void doEventDAO(SessionFactory factory)  {
 
         final Event event = EventService.listOfEvents.get(firstListElement);
 
@@ -30,7 +31,7 @@ public class DAODBOperator {
         System.out.println();
     }
 
-    public static void doUserDAO(SessionFactory factory) throws IOException, SQLException {
+    public static void doUserDAO(SessionFactory factory) {
 
       final User user = UserService.listOfUsers.get(firstListElement);
 
@@ -43,13 +44,16 @@ public class DAODBOperator {
       System.out.println();
     }
 
-    public static void doTicketDAO(SessionFactory factory) throws IOException, SQLException {
+    public static void doTicketDAO(SessionFactory factory) {
       DAO<Ticket> ticketDAO = new TicketDAO(factory);
 
       List<Ticket> listOfTickets = TicketService.listOfTickets;
+      long startTime = System.currentTimeMillis();
       for (Ticket tempTicket: listOfTickets){
         ticketDAO.create(tempTicket);
       }
+      long stopTime = System.currentTimeMillis();
+      diff = stopTime - startTime;
 
       ticketDAO.doUpdateJoinColumnInTable("event");
       ticketDAO.doUpdateJoinColumnInTable("user");
